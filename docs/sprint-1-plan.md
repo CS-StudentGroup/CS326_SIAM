@@ -1,58 +1,49 @@
-# Sprint 1 Plan – USTP Nexus
+# Sprint 1 Plan – Pad Renting Management
 
 ## Sprint Goal
 
-Deliver core user functionality: authentication and basic task management.
+Deliver core user functionality for landlords: secure authentication and basic pad/room management (Create and Delete).
 
 ---
 
 ## Selected User Stories
 
-### Story 1: Account Registration
+### Story 1: Landlord Login
 
-* Owner: Tion
-* Priority: High
-* Story Points: 3
+* **Owner:** Olaer
+* **Priority:** High
+* **Story Points:** 3
 
----
+### Story 2: Add Pad/Room
 
-### Story 2: Login System
+* **Owner:** Cabot
+* **Priority:** High
+* **Story Points:** 5
 
-* Owner: Olaer
-* Priority: High
-* Story Points: 2
+### Story 3: Delete Pad
 
----
+* **Owner:** Galleros
+* **Priority:** Medium
+* **Story Points:** 2
 
-### Story 3: Create Tasks
+### Story 4: Register Landlord Account
 
-* Owner: Cabot
-* Priority: High
-* Story Points: 5
+* **Owner:** Tion
+* **Priority:** High
+* **Story Points:** 3
 
----
+### Story 5: Secure Logout
 
-### Story 4: Logout
-
-* Owner: Mesa
-* Priority: High
-* Story Points: 1
-
----
-
-### Story 5: Delete Tasks
-
-* Owner: Galleros
-* Priority: Medium
-* Story Points: 2
+* **Owner:** Mesa
+* **Priority:** High
+* **Story Points:** 1
 
 ---
 
-## Total Story Points: 13
-
+## Total Story Points: 14
 
 ## Notes
 
-* Focus on implementing authentication first (registration + login + logout)
-* Task module should support basic CRUD (Create and Delete in Sprint 1)
-* UI will be kept minimal; focus is on functionality and working backend logic
+* Focus on implementing authentication first (registration + login + logout) to secure the platform.
+* Pad module should support basic CRUD (Create and Delete in Sprint 1) using in-memory storage for rapid prototyping.
+* UI will be kept minimal; the primary focus is on backend logic, input validation, and successful Pytest execution.
