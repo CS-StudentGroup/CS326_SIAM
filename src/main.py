@@ -2,17 +2,54 @@ import re
 import hashlib
 
 def validate_email(email: str) -> bool:
+    """
+    Validates the format of an email address.
+
+    Args:
+        email: The email string to validate.
+
+    Returns:
+        True if the email format is valid, False otherwise.
+    """
     pattern = r'^[\w\.-]+@[\w\.-]+\.\w{2,}$'
     return bool(re.match(pattern, email))
 
 def validate_password(password: str) -> bool:
-    """Returns True if password is at least 8 characters."""
+    """
+    Checks if a password meets the minimum length requirement.
+
+    Args:
+        password: The password string to validate.
+
+    Returns:
+        True if the password is a string of at least 8 characters, False otherwise.
+    """
     return isinstance(password, str) and len(password) >= 8
 
 def hash_password(password: str) -> str:
+    """
+    Hashes a password using SHA-256.
+
+    Args:
+        password: The plaintext password to hash.
+
+    Returns:
+        A hexadecimal SHA-256 hash string of the password.
+    """
     return hashlib.sha256(password.encode()).hexdigest()
 
 def register_user(email: str, password: str, existing_emails: list) -> dict:
+    """
+    Registers a new user if the email and password are valid and the email is not taken.
+
+    Args:
+        email: The user's email address.
+        password: The user's chosen password.
+        existing_emails: A list of already registered email addresses.
+
+    Returns:
+        A dict with 'success' (bool) and 'message' (str).
+    """
     if not validate_email(email):
         return {"success": False, "message": "Invalid email format."}
     if not validate_password(password):
@@ -22,6 +59,17 @@ def register_user(email: str, password: str, existing_emails: list) -> dict:
     return {"success": True, "message": "Registration successful."}
 
 def login_user(email: str, password: str, users_db: dict) -> dict:
+    """
+    Authenticates a user by checking their email and hashed password.
+
+    Args:
+        email: The user's email address.
+        password: The plaintext password to verify.
+        users_db: A dict mapping emails to hashed passwords.
+
+    Returns:
+        A dict with 'success' (bool) and 'message' (str).
+    """
     if email not in users_db:
         return {"success": False, "message": "Invalid credentials."}
     if users_db[email] != hash_password(password):
@@ -29,6 +77,15 @@ def login_user(email: str, password: str, users_db: dict) -> dict:
     return {"success": True, "message": "Login successful."}
 
 def logout_user(session: dict) -> dict:
+    """
+    Clears the current user session.
+
+    Args:
+        session: The session dictionary to clear.
+
+    Returns:
+        A dict with 'success' (bool) and 'message' (str).
+    """
     session.clear()
     return {"success": True, "message": "Logged out successfully."}
 
