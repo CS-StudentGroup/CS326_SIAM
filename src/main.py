@@ -9,7 +9,7 @@ def validate_email(email: str) -> bool:
  
 def validate_password(password: str) -> bool:
     """Returns True if password is at least 8 characters."""
-    return isinstance(password, str) and len(password) > 8
+    return isinstance(password, str) and len(password) >= 8
  
  
 def hash_password(password: str) -> str:
