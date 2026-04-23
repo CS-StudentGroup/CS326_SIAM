@@ -1,7 +1,7 @@
 # Support Plan – USTP Nexus
 
 ## Project: USTP Nexus
-## Version: v0.5
+## Version: v0.8
 ## Last Updated: Week 7
 
 ---

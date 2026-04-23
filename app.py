@@ -10,7 +10,7 @@ tasks_db = []
 
 @app.route("/")
 def index():
-    return jsonify({"message": "USTP Nexus API is running.", "version": "v0.5"})
+    return jsonify({"message": "USTP Nexus API is running.", "version": "v0.8"})
 
 
 

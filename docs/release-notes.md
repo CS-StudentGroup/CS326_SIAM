@@ -1,6 +1,6 @@
 # Release Notes – USTP Nexus
 
-## Version: v0.5-scm
+## Version: v0.8
 ## Release Date: Week 5
 ## Sprint: 1
 

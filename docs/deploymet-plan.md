@@ -1,7 +1,7 @@
 # Deployment Plan – USTP Nexus
 
 ## Project: USTP Nexus
-## Version: v0.5
+## Version: v0.8
 ## Environment: Development
 ## Platform: Render
 ## Last Updated: Week 7
