@@ -34,7 +34,7 @@ Deliver core user functionality: authentication and basic task management.
 
 ### Story 4: Logout
 
-* Owner: Dev 1
+* Owner: Mesa
 * Priority: High
 * Story Points: 1
 
@@ -42,7 +42,7 @@ Deliver core user functionality: authentication and basic task management.
 
 ### Story 5: Delete Tasks
 
-* Owner: Dev 2
+* Owner: Galleros
 * Priority: Medium
 * Story Points: 2
 
