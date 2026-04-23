@@ -128,3 +128,17 @@ Acceptance Criteria:
 - User can log out successfully
 - Session is cleared
 - Redirect to login page
+
+
+---
+**User Story 11** ⭐ *(Added – Week 3 Change Request)*: As a student, I want to view the details of a task so that I can review its full information.
+
+Priority: Medium
+Story Points: 2
+
+Acceptance Criteria:
+- User can click a task to open a detail view
+- Detail view shows title, due date, and any additional notes
+- User can navigate back to the task list from the detail view
+
+---
