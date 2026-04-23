@@ -1,0 +1,22 @@
+# CODEOWNERS – USTP Nexus
+# Defines who is responsible for reviewing changes in each part of the project.
+# GitHub will automatically request reviews from these owners on pull requests.
+
+# Global fallback — all files
+* @tiondominic
+
+# Source code — DevOps lead reviews all code changes
+/src/ @MikeL0L
+
+# Auth logic — Security lead reviews authentication files
+/src/main.py @gwyiomi03
+
+# Tests — QA lead reviews all test changes
+/tests/ @Andott1
+
+# Documentation — Documentation lead reviews all doc changes
+/docs/ @mesamariann
+
+# GitHub config — DevOps lead owns workflow and templates
+/.github/ @MikeL0L
+    
