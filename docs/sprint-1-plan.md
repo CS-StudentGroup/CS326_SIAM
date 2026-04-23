@@ -48,13 +48,7 @@ Deliver core user functionality: authentication and basic task management.
 
 ---
 
-
-### Story 6: View Task List
-* Owner: Tion
-* Priority: High
-* Story Points: 2
-
-## Total Story Points: 15
+## Total Story Points: 13
 
 
 ## Notes
