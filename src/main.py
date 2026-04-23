@@ -112,3 +112,19 @@ def delete_pad(pad_id: int, pad_list: list) -> dict:
             pad_list.remove(pad)
             return {"success": True, "message": "Pad removed from system."}
     return {"success": False, "message": "Pad not found."}
+
+def get_pad(pad_id: int, pad_list: list) -> dict:
+    """
+    Retrieves a pad by its ID.
+
+    Args:
+        pad_id: The ID of the pad to retrieve.
+        pad_list: The list of pads to search within.
+
+    Returns:
+        A dict with 'success' (bool), 'message' (str), and 'pad' (dict) if found.
+    """
+    for pad in pad_list:
+        if pad["id"] == pad_id:
+            return {"success": True, "message": "Pad found.", "pad": pad}
+    return {"success": False, "message": "Pad not found."}

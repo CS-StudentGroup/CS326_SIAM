@@ -2,7 +2,7 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
 
-from main import register_user, add_pad, delete_pad
+from main import register_user, add_pad, delete_pad, get_pad
 
 def test_register_valid_user():
     result = register_user("landlord@rentals.com", "securepass123", [])
@@ -33,3 +33,9 @@ def test_delete_existing_pad():
     result = delete_pad(1, pad_list)
     assert result["success"] is True
     assert len(pad_list) == 0
+
+def test_get_existing_pad():
+    pad_list = [{"id": 1, "room_name": "Room A", "monthly_price": 5000.00, "is_occupied": False}]
+    result = get_pad(1, pad_list)
+    assert result["success"] is True
+    assert result["pad"]["room_name"] == "Room A"
