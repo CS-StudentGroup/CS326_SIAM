@@ -1,144 +1,185 @@
-Product Backlog – USTP Nexus
-
-
- **User Story 1**: As a student, I want to create an account so that I can access the platform.
-
-Priority: High
-
-Story Points: 3
-
-Acceptance Criteria:
-- User can register with email and password
-- Validation for required fields
-- Error shown for duplicate email 
+# Product Backlog — Pad Renting Management
 
 ---
 
-**User Story 2**: As a user, I want to log in so that I can access my dashboard.
+## User Story 1 — Secure landlord login
 
-Priority: High
+| Field | Details |
+| --- | --- |
+| As a | landlord |
+| I want | to securely log in |
+| So that | unauthorized users cannot access my property data |
+| Priority | High |
+| Story points | 3 |
 
-Story Points: 2
+### Story 1 — Acceptance criteria
 
-Acceptance Criteria:
-
-- User can log in with valid credentials
-- Error message for invalid login
-- Redirect to dashboard after login
-
----
-
-**User Story 3**: As a student, I want to create tasks so that I can track my assignments.
-Priority: High
-
-Story Points: 5
-
-Acceptance Criteria:
-
-- User can add task title and due date
-- Task appears in task list
-- Task can be saved successfully
----
-
-**User Story 4**: As a user, I want to edit tasks so that I can update details.
-Priority: Medium
-
-Story Points: 3
-
-Acceptance Criteria:
-
-- User can modify task details
-- Changes are saved correctly
-- UI updates immediately
----
-**User Story 5**: As a user, I want to delete tasks so that I can remove completed ones.
-Priority: Medium
-
-Story Points: 2
-
-Acceptance Criteria:
-
-- User can delete a task
-- Confirmation prompt appears
-- Task is removed from list
+- User can log in with valid credentials.
+- Error is shown for invalid login.
 
 ---
 
-**User Story 6**: As a student, I want to view upcoming events so that I stay informed.
-Priority: High
+## User Story 2 — Add a new pad/room
 
-Story Points: 5
+| Field | Details |
+| --- | --- |
+| As a | landlord |
+| I want | to add a new pad/room to the system |
+| So that | I can track its availability |
+| Priority | High |
+| Story points | 5 |
 
-Acceptance Criteria:
+### Story 2 — Acceptance criteria
 
-- Events are displayed in a list
-- Each event shows date and title
-- Events are sorted by date
----
-
-**User Story 7**: As an organizer, I want to create events so that students can join.
-
-Priority: Medium
-
-Story Points: 5
-
-Acceptance Criteria:
-
-- Organizer can input event details
-- Event is saved to database
-- Event appears in event list
+- Can input room name and price.
+- Cannot input negative price.
+- New pad appears in the pad list.
 
 ---
 
-**User Story 8**: As a user, I want to join events so that I can participate.
-Priority: Medium
+## User Story 3 — Delete a pad
 
-Story Points: 3
+| Field | Details |
+| --- | --- |
+| As a | landlord |
+| I want | to delete a pad from the system |
+| So that | I can remove pads that are no longer available for rent |
+| Priority | Medium |
+| Story points | 2 |
 
-Acceptance Criteria:
+### Story 3 — Acceptance criteria
 
-User can click “Join”
-System confirms participation
-Event shows joined status
-
----
-
-
-**User Story 9**: As a user, I want notifications so that I don’t miss deadlines.
-Priority: Low
-
-Story Points: 3
-
-Acceptance Criteria:
-
-- Notifications appear before due date
-- User can view notification list
-- Notifications are time-based
+- Can delete by ID.
+- Item is removed from the list.
 
 ---
 
+## User Story 4 — Register a new landlord (admin)
 
-**User Story 10**: As a user, I want to log out so that my account is secure.
-Priority: High
+| Field | Details |
+| --- | --- |
+| As a | system admin |
+| I want | to register a new landlord account |
+| So that | they can use the platform |
+| Priority | High |
+| Story points | 3 |
 
-Story Points: 1
+### Story 4 — Acceptance criteria
 
-Acceptance Criteria:
-
-- User can log out successfully
-- Session is cleared
-- Redirect to login page
-
-
----
-**User Story 11** ⭐ *(Added – Week 3 Change Request)*: As a student, I want to view the details of a task so that I can review its full information.
-
-Priority: Medium
-Story Points: 2
-
-Acceptance Criteria:
-- User can click a task to open a detail view
-- Detail view shows title, due date, and any additional notes
-- User can navigate back to the task list from the detail view
+- Registration validates email format.
+- Password must be 8+ characters.
 
 ---
+
+## User Story 5 — Secure logout
+
+| Field | Details |
+| --- | --- |
+| As a | landlord |
+| I want | to securely log out |
+| So that | my session is terminated on shared devices |
+| Priority | High |
+| Story points | 1 |
+
+### Story 5 — Acceptance criteria
+
+- Session clears on logout.
+- User is redirected to login.
+
+---
+
+## User Story 6 — Mark pad as occupied
+
+| Field | Details |
+| --- | --- |
+| As a | landlord |
+| I want | to mark a pad as occupied |
+| So that | I know it is unavailable |
+| Priority | Medium |
+| Story points | 3 |
+
+### Story 6 — Acceptance criteria
+
+- Can toggle occupancy status (boolean).
+
+---
+
+## User Story 7 — Update monthly rental price
+
+| Field | Details |
+| --- | --- |
+| As a | landlord |
+| I want | to update the monthly rental price of a pad |
+| So that | pricing stays current |
+| Priority | Medium |
+| Story points | 2 |
+
+### Story 7 — Acceptance criteria
+
+- Existing price can be overwritten.
+- Validates for positive numbers.
+
+---
+
+## User Story 8 — Vacant pads dashboard
+
+| Field | Details |
+| --- | --- |
+| As a | landlord |
+| I want | to view a dashboard of all currently vacant pads |
+| So that | I know what needs marketing |
+| Priority | Low |
+| Story points | 3 |
+
+### Story 8 — Acceptance criteria
+
+- List excludes occupied pads.
+
+---
+
+## User Story 9 — Assign tenant name to occupied pad
+
+| Field | Details |
+| --- | --- |
+| As a | landlord |
+| I want | to assign a specific tenant name to an occupied pad |
+| So that | I can track who is in which unit |
+| Priority | Low |
+| Story points | 5 |
+
+### Story 9 — Acceptance criteria
+
+- Input field for tenant name is tied to pad ID.
+
+---
+
+## User Story 10 — Total potential revenue
+
+| Field | Details |
+| --- | --- |
+| As a | landlord |
+| I want | to calculate total potential revenue from all active pads |
+| So that | I can see aggregate monthly income potential |
+| Priority | Low |
+| Story points | 2 |
+
+### Story 10 — Acceptance criteria
+
+- Sum equals the `monthly_price` of all pads in the system.
+
+---
+
+## Summary
+
+| # | Title | Priority | Points |
+| --- | --- | --- | --- |
+| 1 | Secure landlord login | High | 3 |
+| 2 | Add pad/room | High | 5 |
+| 3 | Delete pad | Medium | 2 |
+| 4 | Register landlord (admin) | High | 3 |
+| 5 | Secure logout | High | 1 |
+| 6 | Mark pad occupied | Medium | 3 |
+| 7 | Update rental price | Medium | 2 |
+| 8 | Vacant pads dashboard | Low | 3 |
+| 9 | Assign tenant name | Low | 5 |
+| 10 | Total potential revenue | Low | 2 |
