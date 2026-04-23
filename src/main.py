@@ -56,3 +56,7 @@ def delete_task(task_id: int, task_list: list) -> dict:
             task_list.remove(task)
             return {"success": True, "message": "Task deleted."}
     return {"success": False, "message": "Task not found."}
+
+
+def new_function():
+    print("Hello World")
