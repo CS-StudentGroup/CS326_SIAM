@@ -50,7 +50,7 @@ def require_login(f):
 
 @app.route("/")
 def index():
-    return jsonify({"message": "USTP Nexus API is running.", "version": "v0.8"})
+    return jsonify({"message": "USTP Nexus API is running.", "version": "v1.0"})
 
 
 @app.route("/register", methods=["POST"])
