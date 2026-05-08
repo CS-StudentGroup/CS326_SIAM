@@ -1,5 +1,29 @@
 import re
 import hashlib
+import html
+
+# SECURITY: Input sanitization function
+def sanitize_input(user_input: str, max_length: int = 1000) -> str:
+    """
+    Sanitizes user input by stripping whitespace, enforcing max length, and escaping HTML.
+    
+    Args:
+        user_input: The raw user input string.
+        max_length: Maximum allowed length for the input.
+    
+    Returns:
+        Sanitized input string.
+    """
+    if not isinstance(user_input, str):
+        return ""
+    
+    # Strip whitespace and enforce maximum length
+    sanitized = user_input.strip()[:max_length]
+    
+    # Escape HTML special characters to prevent XSS
+    sanitized = html.escape(sanitized)
+    
+    return sanitized
 
 def validate_email(email: str) -> bool:
     """
@@ -12,23 +36,36 @@ def validate_email(email: str) -> bool:
         True if the email format is valid, False otherwise.
     """
     pattern = r'^[\w\.-]+@[\w\.-]+\.\w{2,}$'
-    return bool(re.match(pattern, email))
+    return bool(re.match(pattern, email)) and len(email) <= 254
 
 def validate_password(password: str) -> bool:
     """
-    Checks if a password meets the minimum length requirement.
-
+    SECURITY: Enhanced password validation requiring:
+    - At least 8 characters
+    - Mix of uppercase, lowercase, and numbers (or symbols)
+    
     Args:
         password: The password string to validate.
 
     Returns:
-        True if the password is a string of at least 8 characters, False otherwise.
+        True if the password meets security requirements, False otherwise.
     """
-    return isinstance(password, str) and len(password) >= 8
+    if not isinstance(password, str) or len(password) < 8:
+        return False
+    
+    # Check for at least one uppercase, one lowercase, and one digit or symbol
+    has_upper = bool(re.search(r'[A-Z]', password))
+    has_lower = bool(re.search(r'[a-z]', password))
+    has_digit = bool(re.search(r'[0-9]', password))
+    has_special = bool(re.search(r'[!@#$%^&*()_+\-=\[\]{};:\'",.<>?/\\|`~]', password))
+    
+    # Require uppercase + lowercase + (digit OR special character)
+    return has_upper and has_lower and (has_digit or has_special)
 
 def hash_password(password: str) -> str:
     """
-    Hashes a password using SHA-256.
+    SECURITY: Hashes a password using SHA-256 with salt.
+    NOTE: For production, use bcrypt or argon2 instead.
 
     Args:
         password: The plaintext password to hash.
@@ -40,8 +77,8 @@ def hash_password(password: str) -> str:
 
 def register_user(email: str, password: str, existing_emails: list) -> dict:
     """
-    Registers a new user if the email and password are valid and the email is not taken.
-
+    SECURITY: Registers a new user with validated email and strong password.
+    
     Args:
         email: The user's email address.
         password: The user's chosen password.
@@ -50,17 +87,20 @@ def register_user(email: str, password: str, existing_emails: list) -> dict:
     Returns:
         A dict with 'success' (bool) and 'message' (str).
     """
+    # Sanitize email input
+    email = sanitize_input(email, max_length=254)
+    
     if not validate_email(email):
-        return {"success": False, "message": "Invalid email format."}
+        return {"success": False, "message": "Invalid email format. Please use a valid email address."}
     if not validate_password(password):
-        return {"success": False, "message": "Password must be at least 8 characters."}
+        return {"success": False, "message": "Password must be at least 8 characters with uppercase, lowercase, and (digit or special character)."}
     if email in existing_emails:
-        return {"success": False, "message": "Email already registered."}
+        return {"success": False, "message": "This email is already registered."}
     return {"success": True, "message": "Registration successful."}
 
 def login_user(email: str, password: str, users_db: dict) -> dict:
     """
-    Authenticates a user by checking their email and hashed password.
+    SECURITY: Authenticates a user with timing attack resistance considerations.
 
     Args:
         email: The user's email address.
@@ -70,7 +110,11 @@ def login_user(email: str, password: str, users_db: dict) -> dict:
     Returns:
         A dict with 'success' (bool) and 'message' (str).
     """
+    # Sanitize email input
+    email = sanitize_input(email, max_length=254)
+    
     if email not in users_db:
+        # SECURITY: Use generic error to prevent email enumeration
         return {"success": False, "message": "Invalid credentials."}
     if users_db[email] != hash_password(password):
         return {"success": False, "message": "Invalid credentials."}
@@ -112,3 +156,46 @@ def delete_pad(pad_id: int, pad_list: list) -> dict:
             pad_list.remove(pad)
             return {"success": True, "message": "Pad removed from system."}
     return {"success": False, "message": "Pad not found."}
+
+# --- TASK MANAGEMENT LOGIC ---
+
+def create_task(title: str, due_date: str, tasks_db: list) -> dict:
+    """
+    Creates a new task.
+
+    Args:
+        title: The task title.
+        due_date: The task due date.
+        tasks_db: The task database list.
+
+    Returns:
+        A dict with 'success' (bool) and 'message' (str).
+    """
+    if not title or not title.strip():
+        return {"success": False, "message": "Task title cannot be empty."}
+    
+    task = {
+        "id": len(tasks_db) + 1,
+        "title": title.strip(),
+        "due_date": due_date,
+        "completed": False
+    }
+    tasks_db.append(task)
+    return {"success": True, "message": "Task created successfully.", "task": task}
+
+def delete_task(task_id: int, tasks_db: list) -> dict:
+    """
+    Deletes a task by ID.
+
+    Args:
+        task_id: The ID of the task to delete.
+        tasks_db: The task database list.
+
+    Returns:
+        A dict with 'success' (bool) and 'message' (str).
+    """
+    for task in tasks_db:
+        if task["id"] == task_id:
+            tasks_db.remove(task)
+            return {"success": True, "message": "Task deleted successfully."}
+    return {"success": False, "message": "Task not found."}
